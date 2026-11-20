@@ -1,0 +1,37 @@
+import socket                                                                                                                  
+                                                                                                                               
+sock=socket.socket(socket.AF_INET, socket.SOCK_DGRAM)                                                                          
+                                                                                                                               
+def start(port):                                                                                                               
+    sock.bind(("0.0.0.0",port))                                                                                                
+    sock.setblocking(False)                                                                                                    
+                                                                                                                               
+def receive():                                                                                                                 
+    messages=[]                                                                                                                
+    while True:                                                                                                                
+        try:                                                                                                                   
+            data,client_address=sock.recvfrom(1024)                                                                            
+        except OSError:                                                                                                        
+            break                                                                                                              
+        line=data.decode().strip()                                                                                             
+        message=(client_address,line)                                                                                          
+        messages.append(message)                                                                                               
+    return messages                                                                                                            
+                                                                                                                               
+def reply(client_address,response_text):                                                                                       
+    data=(response_text+"\n").encode()                                                                                         
+    sock.sendto(data,client_address)                                                                                           
+                                                                                                                               
+def send(server_address,message):                                                                                              
+    client_sock=socket.socket(socket.AF_INET,socket.SOCK_DGRAM)                                                                
+    client_sock.settimeout(2)                                                                                                  
+    try:                                                                                                                       
+        data=message.encode()                                                                                                  
+        client_sock.sendto(data,server_address)                                                                                
+        response_data,sender=client_sock.recvfrom(1024)                                                                        
+        response=response_data.decode().strip()                                                                                
+    except OSError:                                                                                                            
+        print("No response from",server_address[0],"port",server_address[1])                                                   
+        response = None                                                                                                        
+    client_sock.close()                                                                                                        
+    return response                                                                                                            
