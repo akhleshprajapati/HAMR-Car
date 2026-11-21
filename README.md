@@ -40,6 +40,63 @@ HAMR Car/
 
 Each folder contains the code and documentation for a different part of the HAMR project.
 
+## File Setup and Upload Guide
+
+This section explains where each Python file should be saved, which files need to be uploaded to the ESP32-C6, and which files should run on the laptop.
+
+### 1. Auto_manual Mode
+
+Folder: `Auto_manual/`
+
+| File | Where to Save | Where to Run |
+|---|---|---|
+| `main.py` | ESP32-C6 | ESP32-C6 |
+
+Upload `main.py` from the `Auto_manual` folder to the ESP32 using Thonny.
+
+### 2. ESP32 Wireless Control
+
+Folder: `ESP32/`
+
+| File | Where to Save | Where to Run |
+|---|---|---|
+| `main.py` | ESP32-C6 | ESP32-C6 |
+| `server.py` | ESP32-C6 | ESP32-C6 |
+| `wifi.py` | ESP32-C6 | ESP32-C6 |
+
+Upload all three files from the `ESP32` folder to the ESP32-C6 using Thonny.
+
+### 3. Laptop Control
+
+Folder: `Laptop/`
+
+| File | Where to Save | Where to Run |
+|---|---|---|
+| `user.py` | Laptop | Laptop |
+| `server.py` | Laptop | Laptop |
+
+Keep both files inside the `Laptop` folder on your computer. Connect your laptop to the ESP32 Wi-Fi network and run `user.py` using Python.
+
+### Uploading Files to ESP32 Using Thonny
+
+1. Connect the ESP32-C6 to your laptop using USB.
+2. Open Thonny.
+3. Select the MicroPython interpreter for ESP32.
+4. Open the required Python file from the project folder.
+5. Save or upload the file to the ESP32 device.
+6. Make sure the required files are present on the ESP32.
+7. Run `main.py` to start the selected mode.
+
+### Running Laptop Control
+
+1. Install Python 3 on your laptop.
+2. Connect your laptop to the ESP32 Wi-Fi network.
+3. Open the `Laptop` folder in the terminal.
+4. Run the following command:
+
+   ```bash
+   python user.py
+
 ## Hardware Components
 
 | Component | Quantity | Purpose |
